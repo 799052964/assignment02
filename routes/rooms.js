@@ -99,6 +99,22 @@ router.post('/:id',isLoggedIn, function(req, res, next) {
     });
 });
 
+//delete room
+router.get('/delete/:id', isLoggedIn,function(req, res, next){
+    var id = req.params.id;
+    Room.remove({
+        _id:id
+    }, function(err){
+        if(err){
+            console.log(err);
+            res.render('error');
+        }
+        else{
+            res.redirect('/rooms');
+        }
+    })
+});
+
 // check if user is logged in
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
