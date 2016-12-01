@@ -69,4 +69,15 @@ router.get('/logout', function(req, res, next) {
     res.redirect('/login');
 });
 
+// facebook part
+
+router.get('/facebook', passport.authenticate('facebook'));
+
+router.get('/facebook/callback', passport.authenticate('facebook', {
+    failureRedirect: '/login',
+    failureMessage: 'Invalid Login'
+}), function(req, res, next) {
+    res.redirect('/');
+});
+
 module.exports = router;
